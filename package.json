@@ -1,0 +1,33 @@
+{
+  "name": "androapi",
+  "version": "1.0.0",
+  "description": "API for Android App",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "dev:1": "nodemon src/vanilla.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/JsusMachaca/AndroApi.git"
+  },
+  "keywords": [
+    "jsus"
+  ],
+  "author": "jsus",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/JsusMachaca/AndroApi/issues"
+  },
+  "homepage": "https://github.com/JsusMachaca/AndroApi#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "standard": "^17.1.0"
+  },
+  "eslintConfig": {
+    "extends": "estandard"
+  },
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
