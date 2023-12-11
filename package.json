@@ -7,10 +7,6 @@
     "dev": "nodemon src/index.js",
     "dev:1": "nodemon src/vanilla.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/JsusMachaca/AndroApi.git"
-  },
   "keywords": [
     "jsus"
   ],
