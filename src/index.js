@@ -1,7 +1,7 @@
 const express = require('express')
 const fs = require('node:fs')
-const jsonData = require('../movies.json')
-const validateMovie = require('./schemas/moviesSchema')
+const jsonData = require('../memes.json')
+const validateMeme = require('./schemas/memesSchema')
 
 const app = express()
 const port = 5000
@@ -16,14 +16,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-    const titulo = req.query.titulo
-    const filtData = jsonData.find(data => data.titulo.toLowerCase() == titulo.toLowerCase())
+    const title = req.query.title
+    const filtData = jsonData.find(data => data.title.toLowerCase() == title.toLowerCase())
     res.json(filtData)
 })
 
 
 app.post('/append', (req, res) => {
-    const result = validateMovie(req.body)
+    const result = validateMeme(req.body)
 
     if (result.error) {
         res.status(401).json(result.error)
@@ -33,7 +33,7 @@ app.post('/append', (req, res) => {
 
     } else {
         jsonData.push(result.data)
-        fs.writeFile('./movies.json', JSON.stringify(jsonData, null, 1), () => {
+        fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
             console.log('writing data')
         })   
         res.status(201).json({message: 'recived', data: result.data})
@@ -47,7 +47,7 @@ app.delete('/del', (req, res) => {
         const i = jsonData.indexOf(newData)
         console.log('index', i)
         jsonData.splice(i, 1)
-        fs.writeFile('./movies.json', JSON.stringify(jsonData, null, 1), () => {
+        fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
             console.log('writing data')
         })   
         res.status(204)
@@ -63,11 +63,11 @@ app.put('/edit', (req, res) => {
     if (jsonData.find(data => data.id === id)) {
         const newData = jsonData.find(data => data.id === id)
         const i = jsonData.indexOf(newData)
-        newData.puntuacion = req.body.puntuacion
+        newData.score = req.body.score
 
         jsonData[i] = newData
 
-        fs.writeFile('./movies.json', JSON.stringify(jsonData, null, 1), () => {
+        fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
             console.log('editado')
         })
         res.json({message: 'editado'})
