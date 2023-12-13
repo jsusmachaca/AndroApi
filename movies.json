@@ -88,5 +88,23 @@
   "actor_principal": "Anthony Hopkins",
   "director": "Jonathan Demme",
   "puntuacion": 4
+ },
+ {
+  "id": 11,
+  "titulo": "Barbie",
+  "descripcion": "Barbie es Barbie.",
+  "banner": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfzT9O0IBDumCXZjeAIhSYLANDT5ip_dwMNKr9-fBQfaSuD3sv",
+  "actor_principal": "Leonardo DiCaprio",
+  "director": "Christopher Nolan",
+  "puntuacion": 10
+ },
+ {
+  "id": 12,
+  "titulo": "Barbie 2",
+  "descripcion": "Barbie es Barbie.",
+  "banner": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfzT9O0IBDumCXZjeAIhSYLANDT5ip_dwMNKr9-fBQfaSuD3sv",
+  "actor_principal": "Leonardo DiCaprio",
+  "director": "Christopher Nolan",
+  "puntuacion": 7
  }
 ]

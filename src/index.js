@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-    const id = req.query.id
-    const filtData = jsonData.find(data => data.id == id)
+    const titulo = req.query.titulo
+    const filtData = jsonData.find(data => data.titulo.toLowerCase() == titulo.toLowerCase())
     res.json(filtData)
 })
 

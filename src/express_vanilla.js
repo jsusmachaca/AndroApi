@@ -59,8 +59,8 @@ app.post('/appends', (req, res) => {
 
 
 app.get('/search', (req, res) => {
-    const id = req.query.id
-    const filtData = jsonData.find(data => data.id == id)
+    const titulo = req.query.titulo
+    const filtData = jsonData.find(data => data.titulo == titulo)
     res.json(filtData)
 })
 
