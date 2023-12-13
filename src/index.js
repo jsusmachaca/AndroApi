@@ -17,7 +17,9 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
     const title = req.query.title
-    const filtData = jsonData.find(data => data.title.toLowerCase() == title.toLowerCase())
+    const filtData = jsonData.find(
+        data => data.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() == title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+        )
     res.json(filtData)
 })
 
