@@ -2,7 +2,7 @@
   "name": "androapi",
   "version": "1.0.0",
   "description": "API for Android App",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
     "dev:1": "nodemon src/vanilla.js"
