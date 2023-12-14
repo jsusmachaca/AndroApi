@@ -4,7 +4,6 @@ const jsonData = require('../memes.json')
 const validateMeme = require('./schemas/memesSchema')
 
 const app = express()
-const port = 5000
 
 app.disable('x-powered-by')
 app.use(express.json())
@@ -26,13 +25,13 @@ app.get('/search', (req, res) => {
 
 app.post('/append', (req, res) => {
     const result = validateMeme(req.body)
-
+    
     if (result.error) {
         res.status(401).json(result.error)
     }
     else if (jsonData.find(datas => datas.id === result.data.id)) {
         res.status(406).json({error: 'Error, dato ya existente', data_error: result.data})
-
+        
     } else {
         jsonData.push(result.data)
         fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
@@ -61,14 +60,14 @@ app.delete('/del', (req, res) => {
 
 app.put('/edit', (req, res) => {
     const id = parseInt(req.query.id)
-
+    
     if (jsonData.find(data => data.id === id)) {
         const newData = jsonData.find(data => data.id === id)
         const i = jsonData.indexOf(newData)
         newData.score = req.body.score
-
+        
         jsonData[i] = newData
-
+        
         fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
             console.log('editado')
         })
@@ -78,6 +77,8 @@ app.put('/edit', (req, res) => {
         res.json({error: 'no se encontró la pelicula'})
     }
 })
+
+const port = process.env.PORT ?? 5000
 
 app.listen(port, () => {
     console.log(`server listening on port http://localhost:${port}`)
