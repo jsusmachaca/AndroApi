@@ -4,8 +4,7 @@
   "description": "API for Android App",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "dev:1": "nodemon src/vanilla.js"
+    "start": "node src/index.js"
   },
   "keywords": [
     "jsus"
