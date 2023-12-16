@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const fs = require('node:fs')
 const jsonData = require('../memes.json')
 const {validateMeme, validatePartialMeme} = require('./schemas/memesSchema')
@@ -7,7 +8,26 @@ const app = express()
 
 app.disable('x-powered-by')
 app.use(express.json())
-
+app.use(cors(
+    {
+        origin: (origin, callback) => {
+            const ACCEPTED_ORIGINS = [
+                'http://localhost:8080',
+                'http://localhost:9000',
+                'http://localhost:8000',
+                'https://androapi-dev-ggte.4.us-1.fl0.io'
+            ]
+            if (ACCEPTED_ORIGINS.includes(origin)) {
+                return callback(null, true)
+            }
+            if (!origin) {
+                return callback(null, true)
+            }
+            return callback(new Error('Not Allowed by CORS'))
+            
+        }
+    }
+))
 
 
 app.get('/', (req, res) => {
