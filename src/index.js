@@ -1,7 +1,7 @@
 const express = require('express')
 const fs = require('node:fs')
 const jsonData = require('../memes.json')
-const validateMeme = require('./schemas/memesSchema')
+const {validateMeme, validatePartialMeme} = require('./schemas/memesSchema')
 
 const app = express()
 
@@ -27,10 +27,10 @@ app.post('/append', (req, res) => {
     const result = validateMeme(req.body)
     
     if (result.error) {
-        res.status(401).json(result.error)
+        return res.status(401).json(result.error)
     }
     else if (jsonData.find(datas => datas.id === result.data.id)) {
-        res.status(406).json({error: 'Error, dato ya existente', data_error: result.data})
+        return res.status(406).json({error: 'Error, dato ya existente', data_error: result.data})
         
     } else {
         jsonData.push(result.data)
@@ -49,7 +49,7 @@ app.delete('/del', (req, res) => {
         console.log('index', i)
         jsonData.splice(i, 1)
         fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
-            console.log('writing data')
+            console.log('delete data')
         })   
         res.status(204)
         
@@ -60,16 +60,22 @@ app.delete('/del', (req, res) => {
 
 app.put('/edit', (req, res) => {
     const id = parseInt(req.query.id)
+    const result = validatePartialMeme(req.body)
+
+    if (result.error) {
+        return res.status(404).json(result.error)
+    }
+    const newData = jsonData.find(data => data.id === id)
     
-    if (jsonData.find(data => data.id === id)) {
-        const newData = jsonData.find(data => data.id === id)
-        const i = jsonData.indexOf(newData)
-        newData.score = req.body.score
-        
-        jsonData[i] = newData
+    if (newData) {
+        const index = jsonData.indexOf(newData)
+        jsonData[index] = {
+            ...jsonData[index],
+            ...result.data
+        }
         
         fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
-            console.log('editado')
+            console.log('edit data')
         })
         res.json({message: 'editado'})
         
