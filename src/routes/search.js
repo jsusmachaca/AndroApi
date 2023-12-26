@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const jsonData = require('../../memes.json')
+import { Router } from 'express'
+import { readFileSync } from 'node:fs'
+const jsonData = JSON.parse(readFileSync('./memes.json', 'utf-8'))
 
-
+const router = Router()
 
 router.get('/search', (req, res) => {
     const title = req.query.title
@@ -12,4 +12,4 @@ router.get('/search', (req, res) => {
     res.json(filtData)
 })
 
-module.exports = router
+export default router

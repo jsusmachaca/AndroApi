@@ -1,38 +1,33 @@
-const zod = require('zod')
+import { z } from 'zod'
 
 
-const memesSchema = zod.object({
-    id: zod.number({
+const memesSchema = z.object({
+    id: z.number({
         required_error: 'El id es requerido'
     }).int().positive(),
 
-    title: zod.string({
+    title: z.string({
         required_error: 'Titulo es requerido'
     }),
 
-    description: zod.string({
+    description: z.string({
         required_error: 'Descripcion es requerido'
     }),
 
-    banner: zod.string({
+    banner: z.string({
         required_error: 'Banner es requerido'
     }).url(),
 
-    score: zod.number({
+    score: z.number({
         required_error: 'La puntuación es requerida'
     }).int().min(1).max(10)
 })
 
 
-const validateMeme = (input) => {
+export const validateMeme = (input) => {
     return memesSchema.safeParse(input)
 }
 
-const validatePartialMeme = (input) => {
+export const validatePartialMeme = (input) => {
     return memesSchema.partial().safeParse(input)
-}
-
-module.exports = {
-    validateMeme, 
-    validatePartialMeme
 }

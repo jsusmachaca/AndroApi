@@ -1,7 +1,10 @@
-const router = require('express').Router()
-const fs = require('node:fs')
-const jsonData = require('../../memes.json')
+import { Router } from 'express'
+import { writeFile } from 'node:fs'
+import { readFileSync } from 'node:fs'
+const jsonData = JSON.parse(readFileSync('./memes.json', 'utf-8'))
 
+
+const router = Router()
 
 
 router.delete('/del', (req, res) => {
@@ -11,7 +14,7 @@ router.delete('/del', (req, res) => {
         const i = jsonData.indexOf(newData)
         console.log('index', i)
         jsonData.splice(i, 1)
-        fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
+        writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
             console.log('delete data')
         })   
         res.status(204)
@@ -22,4 +25,4 @@ router.delete('/del', (req, res) => {
 })
 
 
-module.exports = router
+export default router

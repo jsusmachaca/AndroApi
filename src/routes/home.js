@@ -1,7 +1,8 @@
-const express = require('express')
-const jsonData = require('../../memes.json')
+import { Router } from 'express'
+import { readFileSync } from 'node:fs'
+const jsonData = JSON.parse(readFileSync('./memes.json', 'utf-8'))
 
-const router = express.Router()
+const router = Router()
 
 
 router.get('/', (req, res) => {
@@ -9,4 +10,4 @@ router.get('/', (req, res) => {
 })
 
 
-module.exports = router
+export default router

@@ -1,8 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const fs = require('node:fs')
-const { validatePartialMeme} = require('../schemas/memesSchema')
-const jsonData = require('../../memes.json')
+import { Router } from 'express'
+const router = Router()
+import { writeFile } from 'node:fs'
+import { validatePartialMeme } from '../schemas/memesSchema.js'
+import { readFileSync } from 'node:fs'
+const jsonData = JSON.parse(readFileSync('./memes.json', 'utf-8'))
 
 
 
@@ -22,7 +23,7 @@ router.put('/edit', (req, res) => {
             ...result.data
         }
         
-        fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
+        writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
             console.log('edit data')
         })
         res.json({message: 'editado'})
@@ -33,4 +34,4 @@ router.put('/edit', (req, res) => {
 })
 
 
-module.exports = router
+export default router

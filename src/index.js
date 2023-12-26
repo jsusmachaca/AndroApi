@@ -1,15 +1,15 @@
-const express = require('express')
-const routerHome = require('./routes/home')
-const routerSearch = require('./routes/search')
-const routerDel = require('./routes/delete')
-const routerEdit = require('./routes/edit')
-const corsMiddleware = require('./middlewares/cors')
+import express, { json } from 'express'
+import routerHome from './routes/home.js'
+import routerSearch from './routes/search.js'
+import routerDel from './routes/delete.js'
+import routerEdit from './routes/edit.js'
+import corsMiddleware from './middlewares/cors.js'
 
 const app = express()
 
 app.disable('x-powered-by')
 app.use(corsMiddleware())
-app.use(express.json())
+app.use(json())
 
 
 app.use('/', routerHome)

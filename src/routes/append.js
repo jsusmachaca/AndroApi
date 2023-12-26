@@ -1,7 +1,12 @@
-const router = require('express').Router()
-const fs = require('node:fs')
-const {validateMeme } = require('../schemas/memesSchema')
-const jsonData = require('../../memes.json')
+import { Router } from 'express'
+import { writeFile } from 'node:fs'
+import { validateMeme } from '../schemas/memesSchema.js'
+import { readFileSync } from 'node:fs'
+const jsonData = JSON.parse(readFileSync('./memes.json', 'utf-8'))
+
+
+
+const router = Router()
 
 
 
@@ -16,11 +21,11 @@ router.post('/append', (req, res) => {
         
     } else {
         jsonData.push(result.data)
-        fs.writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
+        writeFile('./memes.json', JSON.stringify(jsonData, null, 1), () => {
             console.log('writing data')
         })   
         res.status(201).json({message: 'recived', data: result.data})
     }
 })
 
-module.exports = router
+export default router
