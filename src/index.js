@@ -1,6 +1,5 @@
 import express, { json } from 'express'
 import routerHome from './routes/home.js'
-import routerSearch from './routes/search.js'
 import routerDel from './routes/delete.js'
 import routerEdit from './routes/edit.js'
 import corsMiddleware from './middlewares/cors.js'
@@ -13,7 +12,6 @@ app.use(json())
 
 
 app.use('/', routerHome)
-app.use('/', routerSearch)
 app.use('/', routerDel)
 app.use('/', routerEdit)
 

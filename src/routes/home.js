@@ -6,7 +6,14 @@ const router = Router()
 
 
 router.get('/', (req, res) => {
-    res.json(jsonData)
+    const { title } = req.query
+    if (title) {
+        const filtData = jsonData.find(
+            data => data.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() == title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+        )
+        return res.json(filtData)
+    }    
+    return res.json(jsonData)
 })
 
 
