@@ -2,6 +2,7 @@ import express, { json } from 'express'
 import routerHome from './routes/home.js'
 import routerDel from './routes/delete.js'
 import routerEdit from './routes/edit.js'
+import routerAppend from './routes/append.js'
 import corsMiddleware from './middlewares/cors.js'
 
 const app = express()
@@ -14,6 +15,7 @@ app.use(json())
 app.use('/', routerHome)
 app.use('/', routerDel)
 app.use('/', routerEdit)
+app.use('/', routerAppend)
 
 const port = process.env.PORT ?? 5000
 
